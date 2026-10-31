@@ -1,0 +1,32 @@
+name: FreeRedact CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Chromium and Python dependencies
+        run: |
+          python -m pip install --disable-pip-version-check playwright pillow
+          python -m playwright install --with-deps chromium
+      - name: Run source, pixel, privacy and browser tests
+        run: |
+          npm run check
+          npm test
+          python tests/offline_browser_regression.py
+          python tests/export_integrity.py
+          python tests/mobile_touch_offline.py
+          python tests/metadata_integrity.py
+          python tests/browser_smoke.py
