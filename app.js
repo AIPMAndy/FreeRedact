@@ -198,3 +198,18 @@ $('#scanBtn').addEventListener('click',async()=>{
   finally{busy=false;updateControls();}
 });
 updateControls();
+
+/* Optional author contact uses browser clipboard only: no third-party calls. */
+const wechatCopyButton=document.getElementById('copyWechatBtn');
+const wechatCopyStatus=document.getElementById('copyWechatStatus');
+if(wechatCopyButton&&wechatCopyStatus){
+  wechatCopyButton.addEventListener('click',async()=>{
+    try{
+      if(!navigator.clipboard?.writeText)throw new Error('Clipboard API unavailable');
+      await navigator.clipboard.writeText('AIPMAndy');
+      wechatCopyStatus.textContent='已复制微信号 AIPMAndy';
+    }catch{
+      wechatCopyStatus.textContent='复制未成功，请长按微信号 AIPMAndy 手动复制。';
+    }
+  });
+}
