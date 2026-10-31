@@ -24,6 +24,16 @@
 
 > **重要：** 手动遮挡前后都要检查手机号、身份证、聊天头像、二维码、家庭地址和其他敏感内容。本产品的浏览器原生 OCR 检测为实验性能力，可能漏检，不能作为安全保证。
 
+## 👀 效果预览
+
+<div align="center">
+
+<a href="https://aipmandy.github.io/FreeRedact/"><img src="docs/screenshot.webp" alt="FreeRedact 在线工具首页截图" width="860"></a>
+
+<sub>点击图片打开在线版 · <a href="https://aipmandy.github.io/FreeRedact/">aipmandy.github.io/FreeRedact</a></sub>
+
+</div>
+
 ## 🚀 本地启动
 
 ```bash
