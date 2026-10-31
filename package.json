@@ -1,0 +1,12 @@
+{
+  "name": "freeredact-cn",
+  "version": "0.2.0",
+  "private": false,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test tests/detector.test.mjs",
+    "check": "node --check app.js && node --check detector.js",
+    "test:browser:offline": "python3 tests/offline_browser_regression.py"
+  }
+}
