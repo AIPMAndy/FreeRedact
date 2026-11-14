@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#fafaf8">
-  <meta name="description" content="FreeWatermark，免费开源的图片加水印工具。手机打开即可给截图添加星觉科技、安迪星觉或自定义水印，支持批量导出。图片只在浏览器本地处理。">
+  <meta name="description" content="FreeWatermark，免费开源的轻量图片加水印工具，默认疏朗排布与精致字体。手机打开即可给截图添加星觉科技、安迪星觉或自定义水印，支持批量导出。图片只在浏览器本地处理。">
   <meta name="keywords" content="图片加水印,截图水印,免费加水印,手机加水印,批量加水印,星觉科技,FreeWatermark,本地图片工具">
   <meta name="author" content="AI 酋长 Andy">
   <meta name="robots" content="index,follow">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:title" content="FreeWatermark｜把作品标记为自己的">
-  <meta property="og:description" content="免费开源 · 手机上就能给截图加水印 · 本地处理 · 无需注册">
+  <meta property="og:description" content="疏朗好看的品牌水印 · 免费开源 · 手机可用 · 本地处理">
   <meta property="og:image" content="./og-cover.svg">
   <meta name="color-scheme" content="light">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; manifest-src 'self'; worker-src 'self'; connect-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'">
@@ -70,16 +70,17 @@
         <div class="section-rule"></div>
         <div class="panel-head compact"><div><span class="step-count">03 — MAKE IT YOURS</span><h2>选个水印样式</h2></div></div>
         <div class="mode-grid" id="modeGrid" role="group" aria-label="水印样式">
-          <button type="button" class="mode-card active" data-mode="tile" aria-pressed="true"><span class="mode-art mode-art-tile" aria-hidden="true"><i>星觉</i><i>星觉</i><i>星觉</i></span><span class="mode-name">满屏平铺</span><span class="mode-desc">防搬运常用</span></button>
+          <button type="button" class="mode-card active" data-mode="tile" aria-pressed="true"><span class="mode-art mode-art-tile" aria-hidden="true"><i>星觉</i><i>星觉</i></span><span class="mode-name">疏朗平铺</span><span class="mode-desc">轻量不遮内容</span></button>
           <button type="button" class="mode-card" data-mode="corner" aria-pressed="false"><span class="mode-art mode-art-corner" aria-hidden="true"><i>星觉科技</i></span><span class="mode-name">角标署名</span><span class="mode-desc">简约干净</span></button>
           <button type="button" class="mode-card" data-mode="footer" aria-pressed="false"><span class="mode-art mode-art-footer" aria-hidden="true"><i>星觉科技</i></span><span class="mode-name">底部品牌条</span><span class="mode-desc">像正式作品</span></button>
           <button type="button" class="mode-card" data-mode="manual" aria-pressed="false"><span class="mode-art mode-art-manual" aria-hidden="true"><i>星觉科技</i><b></b></span><span class="mode-name">自由拖动</span><span class="mode-desc">手指就能摆</span></button>
         </div>
+        <div class="preset-hint"><span>✦ 默认「清爽留名」：疏朗排布 · 15% 透明度 · 轻量字重</span><button type="button" id="resetStyleBtn" class="inline-action">恢复清爽默认</button></div>
         <div class="setting-stack">
-          <div class="range-setting"><div class="range-title"><label for="opacity">透明度</label><output id="opacityValue" for="opacity">24%</output></div><input id="opacity" type="range" min="5" max="100" value="24" step="1"></div>
-          <div class="range-setting"><div class="range-title"><label for="size">水印大小</label><output id="sizeValue" for="size">4.5%</output></div><input id="size" type="range" min="2" max="12" value="4.5" step="0.5"></div>
-          <div class="range-setting" id="densityRow"><div class="range-title"><label for="density">平铺密度</label><output id="densityValue" for="density">适中</output></div><input id="density" type="range" min="1" max="4" value="2" step="1"></div>
-          <div class="range-setting" id="angleRow"><div class="range-title"><label for="angle">倾斜角度</label><output id="angleValue" for="angle">-24°</output></div><input id="angle" type="range" min="-60" max="60" value="-24" step="2"></div>
+          <div class="range-setting"><div class="range-title"><label for="opacity">透明度</label><output id="opacityValue" for="opacity">15%</output></div><input id="opacity" type="range" min="5" max="100" value="15" step="1"></div>
+          <div class="range-setting"><div class="range-title"><label for="size">水印大小</label><output id="sizeValue" for="size">3.5%</output></div><input id="size" type="range" min="2" max="12" value="3.5" step="0.5"></div>
+          <div class="range-setting" id="densityRow"><div class="range-title"><label for="density">平铺密度</label><output id="densityValue" for="density">疏朗</output></div><input id="density" type="range" min="1" max="4" value="1" step="1"></div>
+          <div class="range-setting" id="angleRow"><div class="range-title"><label for="angle">倾斜角度</label><output id="angleValue" for="angle">-18°</output></div><input id="angle" type="range" min="-60" max="60" value="-18" step="2"></div>
           <div class="range-setting"><div class="range-title"><span>文字颜色</span><output id="colorValue">深色</output></div><div class="color-picks" id="colors" role="group" aria-label="文字颜色"><button class="color-dot active" type="button" data-color="#111827" aria-pressed="true" aria-label="深色文字" title="深色"><span style="background:#111827"></span></button><button class="color-dot" type="button" data-color="#ffffff" aria-pressed="false" aria-label="白色文字" title="白色"><span style="background:#fff"></span></button><button class="color-dot" type="button" data-color="#5c62e8" aria-pressed="false" aria-label="蓝紫色文字" title="蓝紫色"><span style="background:#5c62e8"></span></button></div></div>
         </div>
         <div class="privacy-tip"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><div><strong>你的原图不会上传到服务器</strong><span>网页只在设备上处理和重新生成图片；请自行保留原图。</span></div></div>

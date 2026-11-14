@@ -11,8 +11,26 @@ function toast(message) {
   clearTimeout(state.lastToastTimer);
   state.lastToastTimer=setTimeout(()=>{node.hidden=true},4400);
 }
-function saveSettings(){try{localStorage.setItem('freewatermark-settings-v1',JSON.stringify(state.options))}catch{}}
-function loadSettings(){try{const raw=localStorage.getItem('freewatermark-settings-v1');if(raw)state.options=normalizeOptions(JSON.parse(raw));}catch{}}
+const SETTINGS_KEY = 'freewatermark-settings-v2';
+function saveSettings(){try{localStorage.setItem(SETTINGS_KEY,JSON.stringify(state.options))}catch{}}
+function loadSettings(){
+  try{
+    const current = localStorage.getItem(SETTINGS_KEY);
+    if (current) { state.options=normalizeOptions(JSON.parse(current)); return; }
+    const legacy = localStorage.getItem('freewatermark-settings-v1');
+    if (!legacy) return;
+    const saved = JSON.parse(legacy);
+    // Refresh old *default* visual values once, while keeping custom choices.
+    if (saved.mode === 'tile') {
+      if (saved.opacity === 24) saved.opacity = DEFAULTS.opacity;
+      if (saved.size === 4.5) saved.size = DEFAULTS.size;
+      if (saved.density === 2) saved.density = DEFAULTS.density;
+      if (saved.angle === -24) saved.angle = DEFAULTS.angle;
+    }
+    state.options = normalizeOptions(saved);
+    saveSettings();
+  }catch{ /* Broken or unavailable storage falls back to clean defaults. */ }
+}
 function updateButtons(){
   const available=state.selectedImage!==null&&!state.busy;
   for(const id of ['downloadBtn','shareBtn','mobileExportBtn'])$(id).disabled=!available;
@@ -29,7 +47,7 @@ function updateSettingsUI(){
   for(const id of ['opacity','size','density','angle'])$(id).value=state.options[id];
   $('opacityValue').textContent=state.options.opacity+'%';
   $('sizeValue').textContent=state.options.size+'%';
-  $('densityValue').textContent=['','稀疏','适中','密集','更密'][state.options.density];
+  $('densityValue').textContent=['','疏朗','标准','紧凑','密集'][state.options.density];
   $('angleValue').textContent=state.options.angle+'°';
   for(const b of document.querySelectorAll('[data-preset]')){let selected=b.dataset.preset===state.options.text;
     if(b.dataset.preset==='custom')selected=!['星觉科技','安迪星觉','AI 酋长 Andy'].includes(state.options.text);
@@ -144,11 +162,12 @@ function bindEvents(){
   $('watermarkText').addEventListener('input',e=>updateSettings({text:e.target.value}));
   for(const b of document.querySelectorAll('[data-mode]'))b.addEventListener('click',()=>{
     const mode=b.dataset.mode;
-    updateSettings({mode, opacity:mode==='corner'?95:mode==='footer'?90:mode==='manual'?55:24});
+    updateSettings({mode, opacity:mode==='corner'?95:mode==='footer'?90:mode==='manual'?55:DEFAULTS.opacity});
     if(mode==='manual')toast('自由拖动已开启：在图片上按住并移动水印');
   });
   for(const id of ['opacity','size','density','angle'])$(id).addEventListener('input',e=>updateSettings({[id]:Number(e.target.value)}));
   for(const b of document.querySelectorAll('[data-color]'))b.addEventListener('click',()=>updateSettings({color:b.dataset.color}));
+  $('resetStyleBtn').addEventListener('click',()=>updateSettings({...DEFAULTS,text:state.options.text,color:state.options.color}));
   $('logoBtn').addEventListener('click',()=>logoInput.click());
   logoInput.addEventListener('change',async e=>{
     const file=e.target.files?.[0];if(!file)return;

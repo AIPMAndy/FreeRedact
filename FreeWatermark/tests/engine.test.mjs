@@ -5,7 +5,7 @@ import {crc32,encodeZip} from '../src/zip.js';
 
 const decoder=new TextDecoder();
 test('default preset is 星觉科技 and tile, designed for screenshots',()=>{
- assert.equal(DEFAULTS.text,'星觉科技');assert.equal(DEFAULTS.mode,'tile');assert.ok(DEFAULTS.opacity>5&&DEFAULTS.opacity<50);
+ assert.equal(DEFAULTS.text,'星觉科技');assert.equal(DEFAULTS.mode,'tile');assert.equal(DEFAULTS.opacity,15);assert.equal(DEFAULTS.density,1);assert.equal(DEFAULTS.size,3.5);
 });
 test('normalization clamps all malformed numeric inputs',()=>{
  const o=normalizeOptions({text:' Hi ',mode:'unknown',opacity:200,size:-1,density:100,angle:-999,x:99,y:-10,color:'red'});
@@ -45,4 +45,20 @@ test('ZIP encodes Chinese filenames and a valid CRC32',async()=>{
  assert.equal(view.getUint32(bytes.length-22,true),0x06054b50);
  assert.equal(view.getUint16(bytes.length-12,true),2);
  assert.ok(decoder.decode(bytes).includes('截图_星觉科技.png'));
+});
+
+test('aesthetic baseline stays airy and uses a medium-weight native font',()=>{
+ const ops=[], ctx={
+  save(){}, restore(){}, beginPath(){}, moveTo(){}, lineTo(){}, quadraticCurveTo(){}, closePath(){},
+  fill(){}, fillRect(){}, translate(){}, rotate(){}, scale(){},
+  fillText(text,x,y){ops.push({text,x,y})}, measureText(){return {width:160}},
+  createLinearGradient(){return {addColorStop(){}}}, letterSpacing:''
+ };
+ drawWatermark(ctx,1170,2532,DEFAULTS);
+ assert.match(ctx.font,/^500 /,'watermarks use medium, not extra bold font');
+ assert.ok(Number.parseFloat(ctx.letterSpacing)>0,'optical spacing is positive');
+ assert.ok(ops.length>4&&ops.length<80,'sparse layout uses a controlled number of marks before crop');
+ const airy=tileSpacing(160,52,DEFAULTS), dense=tileSpacing(160,52,{density:4});
+ assert.ok(airy.stepX>dense.stepX*1.5);
+ assert.ok(airy.stepY>dense.stepY*2);
 });

@@ -4,7 +4,7 @@
  */
 export const DEFAULTS = Object.freeze({
   text: '星觉科技', mode: 'tile', color: '#111827',
-  opacity: 24, size: 4.5, density: 2, angle: -24, x: 0.5, y: 0.5
+  opacity: 15, size: 3.5, density: 1, angle: -18, x: 0.5, y: 0.5
 });
 export const MODES = Object.freeze(['tile','corner','footer','manual']);
 export const MAX_PIXELS = 32_000_000;
@@ -38,8 +38,9 @@ export function textSize(width, height, options) {
 }
 export function tileSpacing(itemWidth, itemHeight, options) {
   const o = normalizeOptions(options);
-  const extraX = [5.1, 3.6, 2.4, 1.4][o.density - 1];
-  const extraY = [8.2, 6.2, 4.3, 2.7][o.density - 1];
+  // Leave more whitespace around each watermark. Density 1 is the airy default.
+  const extraX = [7.0, 5.0, 3.2, 1.8][o.density - 1];
+  const extraY = [12.0, 9.0, 5.6, 3.1][o.density - 1];
   return { stepX: Math.max(20, itemWidth + itemHeight * extraX), stepY: Math.max(20, itemHeight * extraY) };
 }
 function roundedRect(ctx,x,y,w,h,r){
@@ -65,7 +66,10 @@ export function drawWatermark(ctx, width, height, options, logoImage = null) {
   const baseHeight=Math.max(1,fontSize*1.18);
   ctx.save();
   ctx.textBaseline='middle';ctx.textAlign='center';
-  ctx.font=`800 ${fontSize}px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif`;
+  // Use the native Chinese system typeface, in medium weight instead of heavy bold.
+  // Canvas letterSpacing is supported by modern Chromium/Safari; older browsers ignore it safely.
+  ctx.font=`500 ${fontSize}px -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif`;
+  if ('letterSpacing' in ctx) ctx.letterSpacing=`${(fontSize * .045).toFixed(2)}px`;
   const rawWidth=logoImage?fontSize*5:ctx.measureText(o.text).width;
   const logoSize=logoImage?fitImageDimensions(logoImage,rawWidth):null;
   const itemWidth=logoSize?.width??rawWidth;
@@ -106,7 +110,7 @@ export function drawWatermark(ctx, width, height, options, logoImage = null) {
     ctx.fillStyle=grad;ctx.fillRect(0,height-bandHeight,width,bandHeight);
     ctx.save();ctx.textAlign='left';ctx.fillStyle='#ffffff';ctx.globalAlpha=Math.max(.65,alpha);
     if(logoImage){const maxW=width*.48;const useW=Math.min(itemWidth,maxW),useH=useW*itemHeight/itemWidth;ctx.drawImage(logoImage,width*.05,height-bandHeight*.36-useH/2,useW,useH)}
-    else {ctx.font=`800 ${fontSize}px -apple-system,"PingFang SC",sans-serif`;ctx.fillText(o.text,width*.05,height-bandHeight*.35)}
+    else {ctx.font=`600 ${fontSize}px -apple-system,"PingFang SC",sans-serif`;ctx.fillText(o.text,width*.05,height-bandHeight*.35)}
     ctx.restore();
   }else if(o.mode==='manual'){
     ctx.translate(o.x*width,o.y*height);ctx.rotate(o.angle*Math.PI/180);drawItem(0,0);

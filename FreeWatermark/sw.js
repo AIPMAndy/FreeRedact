@@ -1,5 +1,5 @@
 /* Offline cache only for this static tool. User images and generated files are never cached. */
-const CACHE = 'freewatermark-static-v1';
+const CACHE = 'freewatermark-static-v2';
 const ASSETS = ['./', './index.html', './styles.css', './src/app.js', './src/engine.js', './src/zip.js', './favicon.svg', './manifest.webmanifest'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith('freewatermark-') && k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });

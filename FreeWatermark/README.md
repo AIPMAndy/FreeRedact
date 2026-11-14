@@ -20,6 +20,13 @@
 
 日常发布截图、公众号配图、Threads 和小红书内容时，只想在图片上写上品牌名字，却经常要打开复杂的软件或者购买会员。FreeWatermark 专注解决这一件事：**选图 → 选品牌 → 保存**。
 
+## v1.1 视觉升级（2026-11-14）
+
+- **默认更疏朗**：平铺密度从「适中 2」降为「疏朗 1」，同时扩大横纵间距。
+- **更细、更轻**：字重从 `800` 调到 `500`，按系统字体渲染，字间距适度增加。
+- **不抢画面**：默认透明度从 `24%` 调为 `15%`，字号从 `4.5%` 调为 `3.5%`，倾斜角改为 `-18°`。
+- **旧设置兼容**：已用过旧版的人会自动迁移旧版默认值；自定义参数会保留。新增一键「恢复清爽默认」。
+
 ## 已实现功能
 
 - ✳ **品牌快捷预设**：`星觉科技`、`安迪星觉`、`AI 酋长 Andy`、任意自定义文字（最多 64 字符）。
@@ -43,12 +50,12 @@
 ## 本地运行
 
 ```bash
-git clone https://github.com/AIPMAndy/FreeRedact.git
-cd FreeRedact/FreeWatermark
+git clone https://github.com/AIPMAndy/FreeWatermark.git
+cd FreeWatermark
 python3 -m http.server 8080
 ```
 
-访问 `http://localhost:8080/`。无构建步骤、无 npm 运行时依赖。若源代码已经迁移到独立仓库，把路径替换为 `FreeWatermark` 即可。
+访问 `http://localhost:8080/`。无构建步骤、无 npm 运行时依赖。独立仓库创建前，可先下载本项目 ZIP，本地解压进入 `FreeWatermark` 目录运行。
 
 ## 测试
 
@@ -63,9 +70,9 @@ python3 tests/browser_smoke.py
 
 ## GitHub Pages 部署
 
-目录内自带 `.github/workflows/pages.yml`，迁入独立公开仓库根目录即可直接部署。首次使用时在 Settings → Pages 中选择 `GitHub Actions`；工作流通过且网页 HTTP 200 才能视为上线完成。
+项目自带 `.github/workflows/pages.yml`，代码上传独立公开仓库的 `main` 根目录即可部署。首次使用时在 Settings → Pages 中选择 `GitHub Actions`；工作流通过且网页 HTTP 200 才能视为上线完成。
 
-本次临时托管路径是 `FreeRedact/FreeWatermark/`：由 FreeRedact 的 Pages 工作流把该目录作为静态资源拷贝到发布产物里。项目代码与 FreeRedact 的功能代码相互隔离。
+单独仓库创建完成前可通过 `FreeRedact/FreeWatermark/` 临时访问，独立仓库上线后改用 `https://aipmandy.github.io/FreeWatermark/`。原目录仅作为过渡，不应作为长期维护主仓库。
 
 ## 安全、隐私与限制
 
