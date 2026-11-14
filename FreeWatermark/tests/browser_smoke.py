@@ -40,7 +40,8 @@ def run():
             assert page.locator('#hero-title').is_visible()
             assert page.locator('body').evaluate('(el)=>el.scrollWidth<=window.innerWidth+2'),'Mobile horizontal overflow'
             page.locator('#fileInput').set_input_files([str(a),str(b)])
-            page.wait_for_function('document.querySelector("#previewCanvas").width>0 && !document.querySelector("#previewCanvas").hidden')
+            page.locator('#previewCanvas').wait_for(state='visible')
+            page.wait_for_timeout(180)
             assert page.locator('#fileCount').inner_text()=='已选择 2 张'
             # Alpha watermark changes white source pixels.
             has_watermark=page.locator('#previewCanvas').evaluate('''(c)=>{const a=c.getContext('2d').getImageData(0,0,c.width,c.height).data; for(let i=0;i<a.length;i+=4){if(a[i]<253||a[i+1]<253||a[i+2]<253)return true;}return false}''')
@@ -86,7 +87,7 @@ def run():
             desktop=browser.new_context(viewport={'width':1440,'height':980},device_scale_factor=1)
             p=desktop.new_page();p.goto(origin,wait_until='networkidle')
             assert p.locator('body').evaluate('(el)=>el.scrollWidth<=window.innerWidth+2')
-            p.locator('#emptyDemoBtn').click();p.wait_for_function('!document.querySelector("#previewCanvas").hidden')
+            p.locator('#emptyDemoBtn').click();p.locator('#previewCanvas').wait_for(state='visible')
             p.screenshot(path=str(ROOT/'docs'/'screenshot-desktop.png'),full_page=True)
             desktop.close();browser.close()
         print('PASS: mobile width, source upload, watermarked pixels, footer pixels, PNG export size, ZIP, privacy, desktop')
