@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#fafaf8">
+  <meta name="description" content="FreeWatermark，免费开源的图片加水印工具。手机打开即可给截图添加星觉科技、安迪星觉或自定义水印，支持批量导出。图片只在浏览器本地处理。">
+  <meta name="keywords" content="图片加水印,截图水印,免费加水印,手机加水印,批量加水印,星觉科技,FreeWatermark,本地图片工具">
+  <meta name="author" content="AI 酋长 Andy">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:title" content="FreeWatermark｜把作品标记为自己的">
+  <meta property="og:description" content="免费开源 · 手机上就能给截图加水印 · 本地处理 · 无需注册">
+  <meta property="og:image" content="./og-cover.svg">
+  <meta name="color-scheme" content="light">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; manifest-src 'self'; worker-src 'self'; connect-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'">
+  <title>FreeWatermark｜免费在线图片加水印 · 手机可用 · 本地处理</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./src/app.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"FreeWatermark","description":"免费、开源、浏览器本地运行的图片加水印应用。支持手机、品牌水印、批量导出。","applicationCategory":"MultimediaApplication","operatingSystem":"Web","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"AI 酋长 Andy","url":"https://github.com/AIPMAndy"},"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"}}</script>
+</head>
+<body>
+  <a class="skip-link" href="#workspace">跳转到加水印工作台</a>
+  <header class="header">
+    <div class="container header-content">
+      <a class="brand" href="./" aria-label="FreeWatermark 首页">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 36 36" fill="none"><rect x="3" y="3" width="30" height="30" rx="10" fill="#17191f"/><path d="M10 25 15 11h4l5 14m-12-5h10M24 12h3m-1.5-1.5v3" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span>Free<span class="brand-heavy">Watermark</span><span class="brand-beta">OPEN SOURCE</span></span>
+      </a>
+      <nav class="header-nav" aria-label="顶部导航">
+        <a class="nav-quiet" href="#features">功能</a>
+        <a class="nav-quiet" href="https://metaver.vip/" target="_blank" rel="noopener noreferrer">关于 Andy</a>
+        <a class="github-link" href="https://github.com/AIPMAndy/FreeRedact/tree/main/FreeWatermark" target="_blank" rel="noopener noreferrer" aria-label="查看 FreeWatermark 开源代码"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4.3 1.1-4.3-2-6-2.3m12 4v-3.2a2.8 2.8 0 0 0-.8-2.2c2.7-.3 5.5-1.3 5.5-6.1a4.7 4.7 0 0 0-1.3-3.2 4.4 4.4 0 0 0-.1-3.2s-1 0-3.3 1.7a11.3 11.3 0 0 0-6 0C6.8 2.8 5.7 2.8 5.7 2.8a4.4 4.4 0 0 0-.1 3.2 4.7 4.7 0 0 0-1.3 3.2c0 4.8 2.8 5.8 5.5 6.1A2.8 2.8 0 0 0 9 17.5V21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> <span>开源代码</span><span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container" aria-labelledby="hero-title">
+      <div class="eyebrow"><span class="signal-dot" aria-hidden="true"></span> PRIVATE BY DESIGN <span class="eyebrow-slash">/</span> 100% FREE</div>
+      <h1 id="hero-title">好内容，<span class="accent-underline">留个名。</span></h1>
+      <p class="hero-sub">截图发出去前，顺手加上自己的水印。<br class="desktop-break">不用装 App，不用充值会员，图片不离开你的设备。</p>
+      <div class="trust-line"><span><span class="trust-icon">✓</span> 本地处理</span><span><span class="trust-icon">✓</span> 手机友好</span><span><span class="trust-icon">✓</span> 批量导出</span><span><span class="trust-icon">✓</span> 完全开源</span></div>
+    </section>
+
+    <section class="workspace container" id="workspace" aria-label="图片水印编辑器">
+      <div class="tool-panel">
+        <div class="panel-head"><div><span class="step-count">01 — YOUR IMAGES</span><h2>先选图片</h2><p>支持截图、照片。可一次选多张。</p></div><span class="local-tag"><span class="local-dot"></span> 仅本地处理</span></div>
+        <div class="upload-drop" id="dropzone">
+          <div class="upload-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="3" stroke="currentColor" fill="none" stroke-width="1.7"/><path d="m5.5 16 4.5-4.5 3 3 2-2 4 4M15 9h.01" stroke="currentColor" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="upload-heading">拖入图片，或从相册选择</div>
+          <div class="upload-detail">PNG / JPG / WebP / 支持解码的 HEIC 等</div>
+          <div class="upload-buttons"><button type="button" class="button button-dark" id="selectBtn">选择图片 <span aria-hidden="true">↗</span></button><button type="button" class="button button-text" id="demoBtn">先试试示例</button></div>
+        </div>
+        <input id="fileInput" type="file" accept="image/*" multiple hidden>
+        <div class="file-row" id="fileRow" aria-live="polite" hidden><div class="file-row-title"><strong id="fileCount">已选择 0 张</strong><button type="button" class="inline-action" id="addMoreBtn">+ 继续添加</button><button type="button" class="inline-action danger" id="clearFilesBtn">清空</button></div><div class="file-chips" id="fileChips" role="list"></div></div>
+
+        <div class="section-rule"></div>
+        <div class="panel-head compact"><div><span class="step-count">02 — YOUR IDENTITY</span><h2>写上你的名字</h2></div></div>
+        <div class="field-title">品牌快捷设置 <span class="field-hint">点一下就切换</span></div>
+        <div class="presets" id="presets" aria-label="水印文字预设"><button type="button" class="preset active" data-preset="星觉科技" aria-pressed="true">星觉科技</button><button type="button" class="preset" data-preset="安迪星觉" aria-pressed="false">安迪星觉</button><button type="button" class="preset" data-preset="AI 酋长 Andy" aria-pressed="false">AI 酋长 Andy</button><button type="button" class="preset" data-preset="custom" aria-pressed="false">自定义</button></div>
+        <label class="field-title margin-top" for="watermarkText">水印文字 <span class="field-hint">随时可以改</span></label>
+        <input class="text-input" type="text" maxlength="64" id="watermarkText" value="星觉科技" autocomplete="off" spellcheck="false" placeholder="输入你的品牌名称">
+        <div class="sub-section-head"><span class="field-title">或者，使用你的 Logo</span><span class="field-hint">透明 PNG 效果更好</span></div>
+        <div class="logo-row"><button class="button button-outline small" type="button" id="logoBtn">＋ 上传 Logo</button><input type="file" id="logoInput" accept="image/png,image/jpeg,image/webp" hidden><span id="logoName" class="logo-name">未添加（使用文字）</span><button type="button" class="inline-action danger" id="removeLogoBtn" hidden>移除</button></div>
+
+        <div class="section-rule"></div>
+        <div class="panel-head compact"><div><span class="step-count">03 — MAKE IT YOURS</span><h2>选个水印样式</h2></div></div>
+        <div class="mode-grid" id="modeGrid" role="group" aria-label="水印样式">
+          <button type="button" class="mode-card active" data-mode="tile" aria-pressed="true"><span class="mode-art mode-art-tile" aria-hidden="true"><i>星觉</i><i>星觉</i><i>星觉</i></span><span class="mode-name">满屏平铺</span><span class="mode-desc">防搬运常用</span></button>
+          <button type="button" class="mode-card" data-mode="corner" aria-pressed="false"><span class="mode-art mode-art-corner" aria-hidden="true"><i>星觉科技</i></span><span class="mode-name">角标署名</span><span class="mode-desc">简约干净</span></button>
+          <button type="button" class="mode-card" data-mode="footer" aria-pressed="false"><span class="mode-art mode-art-footer" aria-hidden="true"><i>星觉科技</i></span><span class="mode-name">底部品牌条</span><span class="mode-desc">像正式作品</span></button>
+          <button type="button" class="mode-card" data-mode="manual" aria-pressed="false"><span class="mode-art mode-art-manual" aria-hidden="true"><i>星觉科技</i><b></b></span><span class="mode-name">自由拖动</span><span class="mode-desc">手指就能摆</span></button>
+        </div>
+        <div class="setting-stack">
+          <div class="range-setting"><div class="range-title"><label for="opacity">透明度</label><output id="opacityValue" for="opacity">24%</output></div><input id="opacity" type="range" min="5" max="100" value="24" step="1"></div>
+          <div class="range-setting"><div class="range-title"><label for="size">水印大小</label><output id="sizeValue" for="size">4.5%</output></div><input id="size" type="range" min="2" max="12" value="4.5" step="0.5"></div>
+          <div class="range-setting" id="densityRow"><div class="range-title"><label for="density">平铺密度</label><output id="densityValue" for="density">适中</output></div><input id="density" type="range" min="1" max="4" value="2" step="1"></div>
+          <div class="range-setting" id="angleRow"><div class="range-title"><label for="angle">倾斜角度</label><output id="angleValue" for="angle">-24°</output></div><input id="angle" type="range" min="-60" max="60" value="-24" step="2"></div>
+          <div class="range-setting"><div class="range-title"><span>文字颜色</span><output id="colorValue">深色</output></div><div class="color-picks" id="colors" role="group" aria-label="文字颜色"><button class="color-dot active" type="button" data-color="#111827" aria-pressed="true" aria-label="深色文字" title="深色"><span style="background:#111827"></span></button><button class="color-dot" type="button" data-color="#ffffff" aria-pressed="false" aria-label="白色文字" title="白色"><span style="background:#fff"></span></button><button class="color-dot" type="button" data-color="#5c62e8" aria-pressed="false" aria-label="蓝紫色文字" title="蓝紫色"><span style="background:#5c62e8"></span></button></div></div>
+        </div>
+        <div class="privacy-tip"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><div><strong>你的原图不会上传到服务器</strong><span>网页只在设备上处理和重新生成图片；请自行保留原图。</span></div></div>
+      </div>
+
+      <div class="preview-panel">
+        <div class="preview-head"><div><span class="step-count">LIVE PREVIEW</span><h2>所见，即所得。</h2></div><span class="preview-live"><span></span> 实时预览</span></div>
+        <div class="preview-stage" id="previewStage"><div class="empty-preview" id="emptyPreview"><div class="empty-art" aria-hidden="true"><div class="fake-card"><div class="fake-window"><i></i><i></i><i></i></div><div class="fake-banner">MAKE IT YOURS.</div><div class="fake-lines"><i></i><i></i><i></i></div><div class="fake-watermark">星觉科技 · 星觉科技 · 星觉科技</div></div><div class="empty-sparkle">✳</div></div><h3>你的截图，即刻拥有署名。</h3><p>从相册选一张图，或打开示例体验</p><div class="empty-actions"><button type="button" class="button button-dark" id="emptySelectBtn">上传一张截图 <span aria-hidden="true">↗</span></button><button type="button" class="button button-outline" id="emptyDemoBtn">查看示例</button></div></div><canvas id="previewCanvas" aria-label="加水印后的图片预览。自由拖动模式下可以用手指调整水印位置。" hidden></canvas></div>
+        <div class="preview-meta"><span id="imageMeta">尚未选择图片</span><span class="privacy-caption">🔒 不上传原图</span></div>
+        <div class="drag-hint" id="dragHint" hidden>↗ 提示：按住图片上的水印，用手指拖到想要的位置</div>
+        <div class="export-box"><div class="export-head"><div><strong>准备好分享了吗？</strong><p>输出一张全新图片，水印会合并到像素中。</p></div><span class="export-step">04 / EXPORT</span></div><div class="export-controls"><label class="export-format" for="format">格式 <select id="format"><option value="image/png">PNG · 清晰无损</option><option value="image/jpeg">JPG · 体积较小</option><option value="image/webp">WebP · 现代格式</option></select></label><button type="button" class="button button-dark button-export" id="downloadBtn" disabled>下载图片 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12m0 0 5-5m-5 5-5-5M5 17v3h14v-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" class="button button-outline button-share" id="shareBtn" disabled>手机分享 / 保存</button><button type="button" class="button button-outline button-batch" id="batchBtn" disabled hidden>批量打包 ZIP <span id="batchCount"></span></button></div><div class="export-note" id="exportNote">导出以原图尺寸生成，不附带原图 EXIF 等元数据。</div></div>
+      </div>
+    </section>
+
+    <section class="benefits container" id="features"><div class="benefits-header"><span class="step-count">BUILT FOR REAL LIFE</span><h2>每次发图之前，<br>都值得多做这一步。</h2><p>不要为了一个水印，打开复杂的修图软件。</p></div><div class="benefit-grid"><article><span class="benefit-symbol">01</span><h3>打开网页就能用</h3><p>无需安装、注册、登录。iPhone、Android 和电脑都能用现代浏览器打开。</p></article><article><span class="benefit-symbol">02</span><h3>多张截图，一次处理</h3><p>最多选择 12 张图片，共用一套水印设置。单张保存或 ZIP 打包带走。</p></article><article><span class="benefit-symbol">03</span><h3>本地处理，更放心</h3><p>原图不经过我们的服务器；编辑与导出由浏览器 Canvas 在设备上完成。</p></article></div></section>
+    <section class="about-strip container"><div class="about-brand">F<span>.</span></div><div><strong>由 AI 酋长 Andy 发起的免费工具计划。</strong><p>和 FreeRedact、FreeCover、FreePhoto 一样，把好用的工具开源，留给所有人。</p></div><a href="https://github.com/AIPMAndy" target="_blank" rel="noopener noreferrer">浏览更多开源作品 <span aria-hidden="true">↗</span></a></section>
+  </main>
+  <footer class="footer"><div class="container footer-row"><div><strong>FreeWatermark<span class="footer-spark">✳</span></strong><p>为每一份原创，留一份署名。© 2026 AI 酋长 Andy</p></div><div class="footer-links"><a href="https://metaver.vip/" target="_blank" rel="noopener noreferrer">个人官网</a><a href="https://github.com/AIPMAndy/FreeRedact/tree/main/FreeWatermark" target="_blank" rel="noopener noreferrer">开源代码</a><button id="copyWechat" type="button" title="复制微信号 AIPMAndy">微信 AIPMAndy ↗</button></div></div></footer>
+  <div class="mobile-bar" id="mobileBar"><span><strong id="mobileFileCount">选择截图开始</strong><small>本地加水印 · 免费导出</small></span><button type="button" class="button button-dark" id="mobileExportBtn" disabled>保存图片 ↗</button></div>
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+</body>
+</html>

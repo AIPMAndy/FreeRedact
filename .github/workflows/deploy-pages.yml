@@ -25,6 +25,9 @@ jobs:
         run: |
           mkdir -p public
           cp index.html app.js detector.js style.css favicon.svg og-cover.svg public/
+          mkdir -p public/FreeWatermark/src
+          cp FreeWatermark/index.html FreeWatermark/styles.css FreeWatermark/favicon.svg FreeWatermark/manifest.webmanifest FreeWatermark/sw.js FreeWatermark/og-cover.svg public/FreeWatermark/
+          cp FreeWatermark/src/*.js public/FreeWatermark/src/
           touch public/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -1,0 +1,41 @@
+name: FreeWatermark CI
+on:
+  push:
+    paths:
+      - 'FreeWatermark/**'
+      - '.github/workflows/freewatermark-ci.yml'
+  pull_request:
+    paths:
+      - 'FreeWatermark/**'
+      - '.github/workflows/freewatermark-ci.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run JavaScript unit tests
+        working-directory: FreeWatermark
+        run: npm test
+      - name: Install browser testing dependencies
+        run: |
+          python -m pip install pillow playwright
+          python -m playwright install --with-deps chromium
+      - name: Test screenshots, mobile UI and PNG/ZIP exports
+        working-directory: FreeWatermark
+        run: python tests/browser_smoke.py
+      - name: Upload UI screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: freewatermark-browser-screenshots
+          path: FreeWatermark/docs/screenshot-*.png
+          if-no-files-found: ignore
