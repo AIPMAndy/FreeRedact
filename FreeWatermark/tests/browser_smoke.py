@@ -80,7 +80,7 @@ def run():
             page.mouse.move(box['x']+box['width']*.65,box['y']+box['height']*.62,steps=3)
             page.mouse.up()
             # Ensure no tracking endpoint or source file upload network requests.
-            assert all(u.startswith(origin) for u in requests),requests
+            assert all(u.startswith(origin) or u.startswith('blob:'+origin) for u in requests),requests
             assert not errors,errors
             page.screenshot(path=str(ROOT/'docs'/'screenshot-mobile.png'),full_page=True)
             context.close()
