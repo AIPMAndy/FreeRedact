@@ -18,7 +18,6 @@ function updateButtons(){
   for(const id of ['downloadBtn','shareBtn','mobileExportBtn'])$(id).disabled=!available;
   $('batchBtn').hidden=state.files.length<2;
   $('batchBtn').disabled=!available;
-  $('batchCount').textContent=`（${state.files.length} 张）`;
   $('mobileFileCount').textContent=state.files.length?`已选 ${state.files.length} 张 · ${state.options.text||'Logo 水印'}`:'选择截图开始';
   $('downloadBtn').textContent=state.busy?'正在生成…':'下载图片';
   // Button contains an SVG in initial HTML, but textContent change is deliberately text-only.
